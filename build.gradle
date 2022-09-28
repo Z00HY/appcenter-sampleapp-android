@@ -13,6 +13,20 @@ dynatrace {
         }
     }
 }
+apply plugin: 'com.dynatrace.instrumentation'
+dynatrace {
+    configurations {
+        sampleConfig {
+            autoStart {
+                applicationId "${System.getenv("DYNATRACE_APPID")}"
+                beaconUrl '${System.getenv("DYNATRACE_BEACONURL")}'
+            }
+            userOptIn false
+            agentBehavior.startupLoadBalancing true
+            sessionReplay.enabled false
+        }
+    }
+}
 buildscript {
     //ext.kotlin_version = '1.6.10'
     repositories {
