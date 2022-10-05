@@ -15,6 +15,8 @@ import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
 import com.microsoft.appcenter.distribute.Distribute;
+import com.amplitude.api.Amplitude;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_root);
 
+        if (!BuildConfig.AMPLITUDE_APIKEY.equals("")) {
+            Amplitude.getInstance().initialize(this, BuildConfig.AMPLITUDE_APIKEY).enableForegroundTracking(getApplication());
+            Amplitude.getInstance().logEvent("EVENT_NAME_HERE");
+        }
         // Initialize SDK
         if (!BuildConfig.APPCENTER_APP_SECRET.equals("")) {
             // Use APPCENTER_APP_SECRET environment variable if it exists

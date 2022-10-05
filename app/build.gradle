@@ -11,6 +11,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // Obtain the value of APPCENTER_APP_SECRET environment variable from Build time.
+        buildConfigField("String", "AMPLITUDE_APIKEY", "\"\"")
+        if (System.getenv("AMPLITUDE_APIKEY") != null) {
+            buildConfigField("String", "AMPLITUDE_APIKEY", "\"${System.getenv("AMPLITUDE_APIKEY")}\"")
+        }
         buildConfigField("String", "APPCENTER_APP_SECRET", "\"\"")
         if (System.getenv("APPCENTER_APP_SECRET") != null) {
             buildConfigField("String", "APPCENTER_APP_SECRET", "\"${System.getenv("APPCENTER_APP_SECRET")}\"")
@@ -37,6 +41,11 @@ dependencies {
     implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
     implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
     implementation "com.microsoft.appcenter:appcenter-distribute:${appCenterSdkVersion}"
+
+    // amplitude
+    implementation 'com.amplitude:analytics-android:1.0+'
+    implementation 'com.amplitude:android-sdk:2.23.2'
+
 
     // Unit Testing
     testImplementation 'androidx.test.ext:junit:1.1.3'

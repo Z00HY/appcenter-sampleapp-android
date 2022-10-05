@@ -7,6 +7,8 @@ dynatrace {
             autoStart {
                 applicationId "${System.getenv('DYNATRACE_APPID')}"
                 beaconUrl "${System.getenv('DYNATRACE_BEACONURL')}"
+                //applicationId "test"
+                //beaconUrl "https://lol.test.com/"
             }
             userOptIn false
             agentBehavior.startupLoadBalancing true
